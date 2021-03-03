@@ -1,21 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { DataGrid } from '@material-ui/data-grid';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+const columns = [
+    {field: 'id',headername: 'ID', width:70},
+    {field: 'FirstName', headerName: 'First name', width: 130 },
+    {field: 'LastName', headerName: 'Last name', width: 130 },
+    {field: 'Phone', headerName: 'Phone', width: 130 }
+]
 
 
-const list=[{LastName:"Ionescu", FirstName:"Ion",Phone:"072121311"},{LastName:"Popescu",FirstName:"Vlad",Phone:"07622222"}]
+
+const list=[{id:"1", LastName:"Ionescu", FirstName:"Ion",Phone:"072121311"},{id:"2",LastName:"Popescu",FirstName:"Vlad",Phone:"07622222"}]
 
 class App  extends React.Component {
     constructor() {
@@ -29,29 +24,10 @@ class App  extends React.Component {
             //const classes = useStyles();
 
             return (
-              <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Surname</TableCell>
-                      <TableCell >Name</TableCell>
-                      <TableCell align="right">Phone</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.Persons.map((person) => (
-                      <TableRow key={person.name}>
-                        <TableCell component="th" scope="row">
-                          {person.FirstName}
-                        </TableCell>
-                        <TableCell>{person.LastName}</TableCell>
-                        <TableCell align="right">{person.Phone}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-        )
+                <div style={{ height: 400, width: '100%' }}>
+                <DataGrid rows={this.state.Persons} columns={columns} pageSize={5} checkboxSelection />
+              </div>
+            )
     }
 }
 
